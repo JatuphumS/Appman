@@ -57,7 +57,7 @@ class App extends React.Component {
       pokemondex: pokemondex
     })
   }
-  
+
   filterCard = (cards, pokemondex) => {
     let array1 = [...cards]
 
@@ -73,22 +73,26 @@ class App extends React.Component {
   render() {
     const { pokemondex, cards } = this.state
     const filterCard = this.filterCard(cards, pokemondex)
+    // console.log(cards)
     return (
       <div className='pocket'>
-        {
-          pokemondex.length > 0 ?
-            pokemondex.map(({ imageUrl, id, name, hp }) =>
-              <Card
-                remove
-                onDelete={this.deletePokemonCardHandler}
-                id={id}
-                key={id}
-                hp={hp}
-                name={name}
-                imageUrl={imageUrl} />)
-            :
-            null
-        }
+          {
+            pokemondex.length > 0 ?
+              pokemondex.map(({ imageUrl, id, name, hp, attacks, weaknesses }) =>
+                <Card
+                  remove
+                  onDelete={this.deletePokemonCardHandler}
+                  id={id}
+                  key={id}
+                  attacks={attacks ? attacks : []}
+                  weaknesses={weaknesses ? weaknesses : []}
+                  hp={hp !== 'None' ? hp : 0}
+                  name={name}
+                  imageUrl={imageUrl} />)
+              :
+              null
+          }
+
 
         {
           this.state.showPokedex ?
